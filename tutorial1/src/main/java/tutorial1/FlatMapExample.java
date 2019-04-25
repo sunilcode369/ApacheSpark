@@ -6,10 +6,9 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.Function;
 
 // Map Example
-public class MapExample {
+public class FlatMapExample {
 	
 	public static void main(String args[]) {
 		
@@ -22,28 +21,22 @@ public class MapExample {
         
         JavaRDD<String> lines = sc.textFile("sample.txt",2);
         
-        // Regular implementation - Capitalize each of the words
-        
-        // All the elements of the RDD is taken and the function is applied
-            JavaRDD<String> words = lines.map( new Function<String,String>() 
-        									{
-        										public String call (String s){
-        										return s.toUpperCase();}   } );
-        
-        
-           // 1.8 way // This acts each line of the RDD
-            
-            JavaRDD<String> words2 = lines.map( line -> (line + "," + 1));
-            
+            // Normal Way	
             JavaRDD<String> words3 = lines.flatMap( new FlatMapFunction<String,String>() 
 					{
 				public Iterable<String> call (String s) {
-															return Arrays.asList(s.split(" "));   
+															return Arrays.asList(s.split(","));   
 														} 
 					});
+            
+            
+            // Java 8 Lambda Style
+            JavaRDD<String> words4 = lines.flatMap(line -> Arrays.asList(line.split(",")));
+            
         
-        System.out.println(words.collect());
-        System.out.println(words2.collect());
+        System.out.println(words3.collect());
+        System.out.println(words4.collect());
+
         sc.close();
 	}
 
