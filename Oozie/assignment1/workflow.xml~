@@ -1,0 +1,12 @@
+<workflow-app xmlns="uri:oozie:workflow:0.2" name="hive-wf">
+    <start to="hive-test"/>
+    <action name="hive-test">
+        <hive xmlns="uri:oozie:hive-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <script>hive.sql</script>
+   	<hive>
+        <ok to="end"/>
+        <error to="kill_job"/>
+   </action>
+</workflow-app>
