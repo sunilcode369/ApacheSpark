@@ -1,0 +1,4 @@
+--pig -x local -l /home/cloudera/projects/ApacheSpark/pig/LOGS/4_loading_multiple_tuples.pig
+input_records = LOAD 'data5.txt' USING PigStorage ('\t') as localtiy:bag{t1:tuple(name:chararray,age:chararray),t2:tuple(home:chararray,famous:chararay)};
+DUMP input_records;
+

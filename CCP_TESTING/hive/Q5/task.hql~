@@ -1,0 +1,31 @@
+-- Date format is pending 
+DROP table HEALTH;
+
+CREATE TABLE IF NOT EXISTS HEALTH(Id STRING ,LowBP INT,HighBP INT,LDL INT,TotalCol INT,Triglycerides INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+tblproperties ("skip.header.line.count"="1");
+
+LOAD DATA LOCAL INPATH './HealthDetail.csv' INTO TABLE HEALTH;
+
+DROP table PATIENT;
+
+CREATE TABLE IF NOT EXISTS PATIENT(Id STRING,FirstName STRING,LastName STRING,Age STRING,BirthDate STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+tblproperties ("skip.header.line.count"="1");
+
+LOAD DATA LOCAL INPATH './PatientInfo.csv' INTO TABLE  PATIENT;
+
+CREATE TABLE PATIENT_HEALTH AS SELECT p.Id ,p.FirstName ,p.LastName ,p.Age ,p.BirthDate,h.LowBP,h.HighBP,h.LDL,h.TotalCol,h.Triglycerides FROM PATIENT p LEFT JOIN HEALTH h ON p.Id == h.Id;
+
+SELECT * FROM PATIENT_HEALTH WHERE LDL > 50;
+
+
+
+
+

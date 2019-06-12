@@ -1,0 +1,22 @@
+# Agent properties - alias def
+agent.sources = src
+agent.channels = ch
+agent.sinks = snk
+
+#Define the Source
+agent.sources.src.type = netcat
+agent.sources.src.bind = localhost
+agent.sources.src.port = 4444
+
+# Define the medium
+agent.channels.ch.type = memory
+agent.channels.ch.capacity = 1000
+agent.channels.ch.transactionCapcity = 100
+
+#Define the sink
+agent.sinks.snk.type = hdfs
+agent.sinks.snk.hdfs.path = hdfs://localhost/user/cloudera/flume
+
+#Connect the channel with sink and source
+agent.sources.src.channels = ch
+agent.sinks.snk.channel = ch

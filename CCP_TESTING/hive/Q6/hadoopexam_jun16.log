@@ -1,0 +1,7 @@
+Jun  3 07:10:54 hadoopexam.com_node01 init: tty (/dev/tty6) main process (1208) killed by TERM signal
+Jun  3 07:11:31 hadoopexam.com_node01 kernel: registered taskstats version 1
+Jun  3 07:11:31 hadoopexam.com_node01 kernel: sr0: scsi3-mmc drive: 32x/32x xa/form2 tray
+Jun  3 07:11:31 hadoopexam.com_node01 kernel: piix4_smbus 0000:00:07.0: SMBus base address uninitialized - upgrade BIOS or use force_addr=0xaddr
+Jun  3 07:11:31 hadoopexam.com_node01 kernel: nf_conntrack version 0.5.0 (7972 buckets, 31888 max)
+Jun  3 07:11:57 hadoopexam.com_node01 kernel: hrtimer: interrupt took 11250457 ns
+Jun  3 07:11:59 hadoopexam.com_node01 ntpd_initres[1705]: host name not found: 0.rhel.pool.ntp.org
